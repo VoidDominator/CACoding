@@ -8,7 +8,7 @@ import java.beans.PropertyChangeSupport;
 
 public class ClearViewModel extends ViewModel {
     public final String CLEAR_SUCCESS = "Successfully cleared all users.";
-
+    public String clearedUsers = "";
     private ClearState state;
 
     public ClearViewModel() {
@@ -33,5 +33,9 @@ public class ClearViewModel extends ViewModel {
 
     public ClearState getState() {
         return state;
+    }
+
+    public void setClearedUsers(String displayStr) {
+        this.clearedUsers = displayStr;
     }
 }

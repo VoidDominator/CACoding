@@ -60,9 +60,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         this.save();
     }
 
-    public void clear() {
+    public String[] clear() {
+        String[] clearedUsernames = accounts.keySet().toArray(new String[0]);
         accounts.clear();
         this.save();
+        return clearedUsernames;
     }
 
     @Override

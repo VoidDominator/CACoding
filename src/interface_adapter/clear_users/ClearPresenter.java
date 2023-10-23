@@ -23,10 +23,16 @@ public class ClearPresenter implements ClearOutputBoundary {
 
         viewManagerModel.setActiveView(clearViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-        System.out.println("Successfully cleared all users.");
+//        System.out.println("Successfully cleared all users.");
 
         //swing popup with message "Successfully cleared all users."
-        JOptionPane.showMessageDialog(null, "Successfully cleared all users.");
+//        JOptionPane.showMessageDialog(null, "Successfully cleared all users.");
+        String displayStr = "";
+        for (String x:clearOutputData.usernames) {
+            displayStr += x+"\n";
+        }
+        clearViewModel.setClearedUsers(displayStr);
+//        JOptionPane.showMessageDialog(null, displayStr);
     }
 
     @Override

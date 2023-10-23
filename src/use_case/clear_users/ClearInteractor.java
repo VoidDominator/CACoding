@@ -13,8 +13,9 @@ public class ClearInteractor implements ClearInputBoundary {
     @Override
     public void execute() {
         try{
-            clearUserDataAccessObject.clear();
-            clearPresenter.prepareSuccessView(new ClearOutputData());
+            String[] clearedUsernames = clearUserDataAccessObject.clear();
+            ClearOutputData clearOutputData = new ClearOutputData(clearedUsernames);
+            clearPresenter.prepareSuccessView(clearOutputData);
         } catch (Exception e) {
             clearPresenter.prepareFailView(e.getMessage());
         }

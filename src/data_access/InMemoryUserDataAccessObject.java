@@ -29,7 +29,9 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     }
 
     @Override
-    public void clear() {
+    public String[] clear() {
+        String[] clearedUsernames = users.keySet().toArray(new String[0]);
         users.clear();
+        return clearedUsernames;
     }
 }

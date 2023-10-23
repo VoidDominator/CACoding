@@ -29,12 +29,12 @@ public class SignupUseCaseFactory {
     private SignupUseCaseFactory() {}
 
     public static SignupView create(
-            ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, SignupViewModel signupViewModel, SignupUserDataAccessInterface userDataAccessObject) {
+            ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, SignupViewModel signupViewModel, SignupUserDataAccessInterface userDataAccessObject, ClearViewModel clearViewModel) {
 
         try {
             SignupController signupController = createUserSignupUseCase(viewManagerModel, signupViewModel, loginViewModel, userDataAccessObject);
-            ClearController clearController = createUserClearUseCase(viewManagerModel, (ClearUserDataAccessInterface) userDataAccessObject);
-            return new SignupView(signupController, signupViewModel, clearController);
+            ClearController clearController = createUserClearUseCase(viewManagerModel, (ClearUserDataAccessInterface) userDataAccessObject, clearViewModel);
+            return new SignupView(signupController, signupViewModel, clearController, clearViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
@@ -55,9 +55,9 @@ public class SignupUseCaseFactory {
         return new SignupController(userSignupInteractor);
     }
 
-    private static ClearController createUserClearUseCase(ViewManagerModel viewManagerModel,ClearUserDataAccessInterface userDataAccessObject) throws IOException {
+    private static ClearController createUserClearUseCase(ViewManagerModel viewManagerModel, ClearUserDataAccessInterface userDataAccessObject, ClearViewModel clearViewModel) throws IOException {
 
-        ClearOutputBoundary signupOutputBoundary = new ClearPresenter(new ClearViewModel(), viewManagerModel);
+        ClearOutputBoundary signupOutputBoundary = new ClearPresenter(clearViewModel, viewManagerModel);
 
         ClearInputBoundary clearSignupInteractor = new ClearInteractor(
                 userDataAccessObject, signupOutputBoundary);
